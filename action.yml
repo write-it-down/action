@@ -1,0 +1,9 @@
+name: 'Write It Down Action'
+description: 'A no-op GitHub Action'
+author: 'Write It Down'
+runs:
+  using: 'composite'
+  steps:
+    - name: Execute no-op action
+      run: echo "No-op action"
+      shell: bash
