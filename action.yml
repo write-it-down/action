@@ -4,6 +4,12 @@ author: 'Write It Down'
 runs:
   using: 'composite'
   steps:
-    - name: Execute no-op action
-      run: echo "No-op action"
+    - name: Setup CLI
+      run: |
+        mkdir -p ~/.write-it-down/bin
+        curl -fsSL https://write-it-down-826b0.web.app/cli/write-it-down -o ~/.write-it-down/bin/write-it-down
+        chmod +x ~/.write-it-down/bin/write-it-down
+      shell: bash
+    - name: Run write-it-down ci
+      run: ~/.write-it-down/bin/write-it-down ci
       shell: bash
