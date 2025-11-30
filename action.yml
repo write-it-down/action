@@ -9,6 +9,18 @@ runs:
         mkdir -p ~/.write-it-down/bin
         curl -fsSL https://write-it-down-826b0.web.app/cli/write-it-down -o ~/.write-it-down/bin/write-it-down
         chmod +x ~/.write-it-down/bin/write-it-down
+        cat > ~/.write-it-down/mcp-config.json << 'EOF'
+{
+  "mcpServers": {
+    "write-it-down": {
+      "type": "local",
+      "command": "${HOME}/.write-it-down/bin/write-it-down",
+      "args": ["mcp"],
+      "tools": ["*"]
+    }
+  }
+}
+EOF
       shell: bash
     - name: Run write-it-down ci
       run: ~/.write-it-down/bin/write-it-down ci
