@@ -18,10 +18,11 @@ runs:
         mkdir -p ~/.write-it-down/bin
         curl -fsSL https://write-it-down-826b0.web.app/cli/write-it-down -o ~/.write-it-down/bin/write-it-down
         chmod +x ~/.write-it-down/bin/write-it-down
+        echo "$HOME/.write-it-down/bin" >> $GITHUB_PATH
       shell: bash
     - name: Run write-it-down ci
       run: |
-        CMD="~/.write-it-down/bin/write-it-down ci"
+        CMD="write-it-down ci"
         if [ -n "${{ inputs.from }}" ]; then
           CMD="$CMD --from ${{ inputs.from }}"
         fi
