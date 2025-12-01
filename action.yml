@@ -1,6 +1,15 @@
 name: 'Write It Down Action'
 description: 'A no-op GitHub Action'
 author: 'Write It Down'
+inputs:
+  from:
+    description: 'Starting commit reference (e.g., HEAD^)'
+    required: false
+    default: ''
+  to:
+    description: 'Ending commit reference (e.g., HEAD)'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -11,5 +20,13 @@ runs:
         chmod +x ~/.write-it-down/bin/write-it-down
       shell: bash
     - name: Run write-it-down ci
-      run: ~/.write-it-down/bin/write-it-down ci
+      run: |
+        CMD="~/.write-it-down/bin/write-it-down ci"
+        if [ -n "${{ inputs.from }}" ]; then
+          CMD="$CMD --from ${{ inputs.from }}"
+        fi
+        if [ -n "${{ inputs.to }}" ]; then
+          CMD="$CMD --to ${{ inputs.to }}"
+        fi
+        eval $CMD
       shell: bash
